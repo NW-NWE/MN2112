@@ -1,323 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Recommended Societies</title>
-  
-  <style>
-    /* 1. Global Styles and Layout */
-    :root {
-      --primary-color: #CC5500; /* Darker Orange */
-      --secondary-color: #A34400; /* Darker Orange for hover */
-      --text-color: #333;
-      --background-color: #f4f4f9;
-      --card-bg: #fff;
-      --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    
-    body.foryou-page {
-      font-family: 'Arial', sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color);
-      margin: 0;
-      padding: 0;
-    }
+/* University of St Andrews look & feel — drop-in replacement for styles.css
+   Sources: PT Sans / PT Serif, colour + type rules from official guidelines.
+   - Primary colour: St Andrews Blue #00539b
+   - Web fonts: PT Sans (primary), PT Serif (limited long-form)
+*/
 
-    header {
-      background-color: var(--card-bg);
-      padding: 20px 0;
-      text-align: center;
-      border-bottom: 4px solid var(--primary-color);
-      box-shadow: var(--shadow-light);
-    }
+/* 1) Base: typography, colours, spacing */
+@import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&display=swap');
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5em;
-      color: var(--primary-color);
-    }
+:root {
+  --sta-blue: #00539b;             /* St Andrews Blue */
+  --sta-blue-700: #004681;         /* darker hover state */
+  --sta-blue-050: #e8f1f9;         /* light tint for backgrounds */
+  --sta-grey-900: #1a1a1a;         /* body text */
+  --sta-grey-700: #4a4a4a;         /* secondary text */
+  --sta-grey-300: #e5e5e5;         /* borders */
+  --sta-grey-100: #f7f7f7;         /* panels */
+  --sta-white: #ffffff;
+  --radius: 6px;
+  --rhythm: 1rem;                  /* vertical spacing unit */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 2px 8px rgba(0,0,0,.08);
+}
 
-    .society-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
-      padding: 30px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
 
-    /* 2. Society Card Styling */
-    .society-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-      border-left: 5px solid var(--primary-color); /* Highlight with the dark orange */
-      transition: transform 0.2s ease-in-out;
-    }
+body {
+  font-family: 'PT Sans', Helvetica, Arial, sans-serif; /* per UStA guidance */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  color: var(--sta-grey-900);
+  background: var(--sta-white);
+  line-height: 1.6;
+}
 
-    .society-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
+/* Constrain line-length like the University site */
+header, section, footer, nav { max-width: 1160px; margin: 0 auto; padding: 0 1rem; }
 
-    .society-card h2 {
-      margin-top: 0;
-      color: var(--primary-color);
-      border-bottom: 1px dashed #eee;
-      padding-bottom: 10px;
-      font-size: 1.5em;
-    }
+/* 2) Headings */
+h1, h2, h3, h4 { color: var(--sta-blue); margin: 0 0 calc(var(--rhythm) * .75); }
+h1 { font-size: clamp(1.75rem, 2.2vw + 1rem, 2.5rem); font-weight: 700; }
+h2 { font-size: 1.5rem; font-weight: 700; }
+h3 { font-size: 1.125rem; font-weight: 700; color: var(--sta-grey-900); }
 
-    .society-card p {
-      margin: 8px 0;
-      font-size: 0.95em;
-      line-height: 1.4;
-    }
+/* Optional long‑form typography */
+.longform { font-family: 'PT Serif', Georgia, 'Times New Roman', serif; }
 
-    .society-card p:first-of-type {
-      font-weight: bold;
-      color: #555;
-    }
+/* 3) Links */
+a { color: var(--sta-blue); text-decoration: underline; text-underline-offset: 2px; }
+a:hover, a:focus { color: var(--sta-blue-700); }
 
-    /* 3. Interest Tag Styling (New Feature) */
-    .interest-tag {
-      display: inline-block;
-      padding: 5px 12px;
-      margin: 5px 0 15px 0;
-      border-radius: 50px; /* Pill shape */
-      font-weight: bold;
-      font-size: 0.8em;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: white;
-      
-      /* Base style for all tags */
-      background-color: #555; 
-    }
+/* 4) Header */
+header {
+  padding: calc(var(--rhythm) * 1.25) 1rem;
+  background: var(--sta-white);
+  border-bottom: 4px solid var(--sta-blue);
+}
 
-    /* Category-specific styling for better visual grouping */
-    .tag-tech-data { background-color: #007BFF; } /* Blue for Tech/Data */
-    .tag-finance-business { background-color: #28A745; } /* Green for Finance/Business */
-    .tag-soft-skills { background-color: #FFC107; color: #333; } /* Yellow for Soft Skills */
-    .tag-culture-hobby { background-color: #6F42C1; } /* Purple for Culture/Hobby */
+/* 5) Tabs / top nav (used in profile page) */
+.tabs {
+  background: var(--sta-blue);
+  border-bottom: 1px solid var(--sta-grey-300);
+}
+.tabs a {
+  display: inline-block;
+  color: var(--sta-white);
+  text-decoration: none;
+  padding: .75rem 1rem;
+  margin-right: .25rem;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.tabs a:hover, .tabs a:focus { background: var(--sta-blue-700); }
 
+/* 6) Buttons */
+button, .btn {
+  appearance: none;
+  background: var(--sta-blue);
+  color: var(--sta-white);
+  border: 1px solid var(--sta-blue);
+  border-radius: var(--radius);
+  padding: .6rem .9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+}
+button:hover, .btn:hover { background: var(--sta-blue-700); border-color: var(--sta-blue-700); }
+button:focus-visible, .btn:focus-visible { outline: 3px solid #ffbf47; outline-offset: 2px; }
 
-    /* 4. Button Styling (Darker Orange) */
-    .society-card button {
-      background-color: var(--primary-color); /* Darker Orange */
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: bold;
-      margin-top: 15px;
-      width: 100%;
-      transition: background-color 0.3s ease, transform 0.1s;
-    }
+/* 7) Forms */
+label { display: block; margin: .5rem 0; color: var(--sta-grey-900); }
+input[type="text"], input[type="number"], input[type="checkbox"] { font: inherit; }
+input[type="text"], input[type="number"] {
+  width: 100%; max-width: 28rem;
+  padding: .55rem .6rem;
+  border: 1px solid var(--sta-grey-300);
+  border-radius: var(--radius);
+  background: var(--sta-white);
+}
+input[type="text"]:focus, input[type="number"]:focus { outline: 3px solid #ffbf47; outline-offset: 2px; }
 
-    .society-card button:hover {
-      background-color: var(--secondary-color); /* Slightly darker on hover */
-      transform: translateY(-1px);
-    }
+fieldset {
+  border: 1px solid var(--sta-grey-300);
+  padding: 1rem;
+  border-radius: var(--radius);
+  background: var(--sta-grey-100);
+  margin-top: 1rem;
+}
+legend { font-weight: 700; color: var(--sta-blue); }
 
-    /* 5. Footer Styling */
-    footer {
-      text-align: center;
-      padding: 20px;
-      background-color: var(--card-bg);
-      border-top: 1px solid #ddd;
-      margin-top: 30px;
-    }
+/* 8) Cards (society list, events) */
+.society-list { padding: calc(var(--rhythm) * 1.25) 0; }
+.society-card, .calendar .event {
+  background: var(--sta-white);
+  border: 1px solid var(--sta-grey-300);
+  border-radius: var(--radius);
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  box-shadow: var(--shadow-sm);
+}
+.society-card h2 { margin-top: 0; }
+.society-card p { margin: .25rem 0; color: var(--sta-grey-700); }
 
-    footer a {
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: bold;
-      font-size: 1.1em;
-      transition: color 0.3s ease;
-    }
+/* 9) Page-specific tweaks */
+.foryou-page body, .profile-page body, .timetable-page body { background: var(--sta-white); }
 
-    footer a:hover {
-      color: var(--secondary-color);
-      text-decoration: underline;
-    }
-  </style>
+/* Timetable */
+.calendar { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 
-</head>
-<body class="foryou-page">
-  <header>
-    <h1>Societies That Match Your Interests</h1>
-  </header>
+/* 10) Footer */
+footer {
+  padding: 1rem;
+  border-top: 1px solid var(--sta-grey-300);
+  background: var(--sta-grey-100);
+  margin-top: 2rem;
+}
+footer a { font-weight: 700; }
 
-  <section class="society-list">
+/* 11) Utility classes */
+.container { max-width: 1160px; margin: 0 auto; padding: 0 1rem; }
+.muted { color: var(--sta-grey-700); }
 
-    <article class="society-card">
-      <h2>Data Science Society</h2>
-      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
-      <p>Events: Hands-on coding nights, real-world data hackathons</p>
-      <p>Next Event: Nov 5, 5pm, Computer Lab 3</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Finance Society</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Market insights, networking with industry leaders</p>
-      <p>Next Event: Oct 15, 6pm, Union Hall</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Consulting Society</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Real case workshops, strategy challenges</p>
-      <p>Next Event: Oct 27, 4:30pm, Business Room 204</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Economics Forum</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Global policy debates, top economist talks</p>
-      <p>Next Event: Oct 23, 2pm, Econ Building 301</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Investment Club</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Stock simulations, trading competitions</p>
-      <p>Next Event: Oct 20, 5:30pm, Business School 102</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Artificial Intelligence Club</h2>
-      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
-      <p>Events: Build-your-own AI, ethics meetups, coding jams</p>
-      <p>Next Event: Nov 3, 6pm, Tech Building</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Entrepreneurship Society</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Startup mixers, founder story nights</p>
-      <p>Next Event: Oct 18, 7pm, Innovation Hub</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Women in Business</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Leadership brunches, career accelerator series</p>
-      <p>Next Event: Oct 22, 10am, Business Centre</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Tech & Innovation Club</h2>
-      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
-      <p>Events: Hackathons, product design sprints</p>
-      <p>Next Event: Oct 24, 7pm, Digital Lab</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Marketing & Media Society</h2>
-      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
-      <p>Events: Brand challenges, creative pitch nights</p>
-      <p>Next Event: Oct 26, 5pm, Media Centre</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Italian Language Club</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Espresso chats, Italian film & food nights</p>
-      <p>Next Event: Oct 16, 5pm, Arts Building</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Sports Analytics Society</h2>
-      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
-      <p>Events: Data-driven game nights, analytics bootcamps</p>
-      <p>Next Event: Nov 2, 3pm, Data Hub</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Public Speaking Society</h2>
-      <div class="interest-tag tag-soft-skills">Matched Interest: Soft Skills</div>
-      <p>Events: TED-style talks, confidence building sessions</p>
-      <p>Next Event: Oct 25, 6pm, Lecture Hall B</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Debating Society</h2>
-      <div class="interest-tag tag-soft-skills">Matched Interest: Soft Skills</div>
-      <p>Events: High-energy debates, inter-uni tournaments</p>
-      <p>Next Event: Oct 19, 6pm, Debate Chamber</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>International Students Association</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Culture nights, global exchange socials</p>
-      <p>Next Event: Nov 1, 6pm, Global Lounge</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Environmental Society</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Eco-action days, sustainability workshops</p>
-      <p>Next Event: Nov 4, 1pm, Green Garden</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Music Production Society</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Studio takeovers, live mix nights</p>
-      <p>Next Event: Oct 29, 7pm, Music Lab</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Film Appreciation Club</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Premiere screenings, director Q&As</p>
-      <p>Next Event: Oct 30, 8pm, Cinema Room</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Photography Society</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Creative photo walks, edit masterclasses</p>
-      <p>Next Event: Oct 21, 4pm, Arts Quad</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-    <article class="society-card">
-      <h2>Chess Club</h2>
-      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
-      <p>Events: Weekly duels, strategy nights</p>
-      <p>Next Event: Oct 28, 5pm, Common Room</p>
-      <button>Add to My Timetable</button>
-    </article>
-
-  </section>
-
-  <footer>
-    <a href="timetable.html">Go to My Timetable</a>
-  </footer>
-</body>
-</html>
+/* 12) Accessibility helpers */
+.skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus { position: static; width: auto; height: auto; padding: .5rem; background: var(--sta-blue); color: var(--sta-white); }
