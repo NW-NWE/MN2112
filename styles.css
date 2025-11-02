@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Recommended Societies</title>
+  
+  <style>
+    /* 1. Global Styles and Layout */
+    :root {
+      --primary-color: #CC5500; /* Darker Orange */
+      --secondary-color: #A34400; /* Darker Orange for hover */
+      --text-color: #333;
+      --background-color: #f4f4f9;
+      --card-bg: #fff;
+      --shadow-light: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    body.foryou-page {
+      font-family: 'Arial', sans-serif;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: var(--card-bg);
+      padding: 20px 0;
+      text-align: center;
+      border-bottom: 4px solid var(--primary-color);
+      box-shadow: var(--shadow-light);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: var(--primary-color);
+    }
+
+    .society-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* 2. Society Card Styling */
+    .society-card {
+      background-color: var(--card-bg);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      border-left: 5px solid var(--primary-color); /* Highlight with the dark orange */
+      transition: transform 0.2s ease-in-out;
+    }
+
+    .society-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .society-card h2 {
+      margin-top: 0;
+      color: var(--primary-color);
+      border-bottom: 1px dashed #eee;
+      padding-bottom: 10px;
+      font-size: 1.5em;
+    }
+
+    .society-card p {
+      margin: 8px 0;
+      font-size: 0.95em;
+      line-height: 1.4;
+    }
+
+    .society-card p:first-of-type {
+      font-weight: bold;
+      color: #555;
+    }
+
+    /* 3. Interest Tag Styling (New Feature) */
+    .interest-tag {
+      display: inline-block;
+      padding: 5px 12px;
+      margin: 5px 0 15px 0;
+      border-radius: 50px; /* Pill shape */
+      font-weight: bold;
+      font-size: 0.8em;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: white;
+      
+      /* Base style for all tags */
+      background-color: #555; 
+    }
+
+    /* Category-specific styling for better visual grouping */
+    .tag-tech-data { background-color: #007BFF; } /* Blue for Tech/Data */
+    .tag-finance-business { background-color: #28A745; } /* Green for Finance/Business */
+    .tag-soft-skills { background-color: #FFC107; color: #333; } /* Yellow for Soft Skills */
+    .tag-culture-hobby { background-color: #6F42C1; } /* Purple for Culture/Hobby */
+
+
+    /* 4. Button Styling (Darker Orange) */
+    .society-card button {
+      background-color: var(--primary-color); /* Darker Orange */
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      margin-top: 15px;
+      width: 100%;
+      transition: background-color 0.3s ease, transform 0.1s;
+    }
+
+    .society-card button:hover {
+      background-color: var(--secondary-color); /* Slightly darker on hover */
+      transform: translateY(-1px);
+    }
+
+    /* 5. Footer Styling */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: var(--card-bg);
+      border-top: 1px solid #ddd;
+      margin-top: 30px;
+    }
+
+    footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.1em;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--secondary-color);
+      text-decoration: underline;
+    }
+  </style>
+
+</head>
+<body class="foryou-page">
+  <header>
+    <h1>Societies That Match Your Interests</h1>
+  </header>
+
+  <section class="society-list">
+
+    <article class="society-card">
+      <h2>Data Science Society</h2>
+      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
+      <p>Events: Hands-on coding nights, real-world data hackathons</p>
+      <p>Next Event: Nov 5, 5pm, Computer Lab 3</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Finance Society</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Market insights, networking with industry leaders</p>
+      <p>Next Event: Oct 15, 6pm, Union Hall</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Consulting Society</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Real case workshops, strategy challenges</p>
+      <p>Next Event: Oct 27, 4:30pm, Business Room 204</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Economics Forum</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Global policy debates, top economist talks</p>
+      <p>Next Event: Oct 23, 2pm, Econ Building 301</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Investment Club</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Stock simulations, trading competitions</p>
+      <p>Next Event: Oct 20, 5:30pm, Business School 102</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Artificial Intelligence Club</h2>
+      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
+      <p>Events: Build-your-own AI, ethics meetups, coding jams</p>
+      <p>Next Event: Nov 3, 6pm, Tech Building</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Entrepreneurship Society</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Startup mixers, founder story nights</p>
+      <p>Next Event: Oct 18, 7pm, Innovation Hub</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Women in Business</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Leadership brunches, career accelerator series</p>
+      <p>Next Event: Oct 22, 10am, Business Centre</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Tech & Innovation Club</h2>
+      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
+      <p>Events: Hackathons, product design sprints</p>
+      <p>Next Event: Oct 24, 7pm, Digital Lab</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Marketing & Media Society</h2>
+      <div class="interest-tag tag-finance-business">Matched Interest: Finance/Biz</div>
+      <p>Events: Brand challenges, creative pitch nights</p>
+      <p>Next Event: Oct 26, 5pm, Media Centre</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Italian Language Club</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Espresso chats, Italian film & food nights</p>
+      <p>Next Event: Oct 16, 5pm, Arts Building</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Sports Analytics Society</h2>
+      <div class="interest-tag tag-tech-data">Matched Interest: Tech/Data</div>
+      <p>Events: Data-driven game nights, analytics bootcamps</p>
+      <p>Next Event: Nov 2, 3pm, Data Hub</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Public Speaking Society</h2>
+      <div class="interest-tag tag-soft-skills">Matched Interest: Soft Skills</div>
+      <p>Events: TED-style talks, confidence building sessions</p>
+      <p>Next Event: Oct 25, 6pm, Lecture Hall B</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Debating Society</h2>
+      <div class="interest-tag tag-soft-skills">Matched Interest: Soft Skills</div>
+      <p>Events: High-energy debates, inter-uni tournaments</p>
+      <p>Next Event: Oct 19, 6pm, Debate Chamber</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>International Students Association</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Culture nights, global exchange socials</p>
+      <p>Next Event: Nov 1, 6pm, Global Lounge</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Environmental Society</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Eco-action days, sustainability workshops</p>
+      <p>Next Event: Nov 4, 1pm, Green Garden</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Music Production Society</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Studio takeovers, live mix nights</p>
+      <p>Next Event: Oct 29, 7pm, Music Lab</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Film Appreciation Club</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Premiere screenings, director Q&As</p>
+      <p>Next Event: Oct 30, 8pm, Cinema Room</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Photography Society</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Creative photo walks, edit masterclasses</p>
+      <p>Next Event: Oct 21, 4pm, Arts Quad</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+    <article class="society-card">
+      <h2>Chess Club</h2>
+      <div class="interest-tag tag-culture-hobby">Matched Interest: Culture/Hobby</div>
+      <p>Events: Weekly duels, strategy nights</p>
+      <p>Next Event: Oct 28, 5pm, Common Room</p>
+      <button>Add to My Timetable</button>
+    </article>
+
+  </section>
+
+  <footer>
+    <a href="timetable.html">Go to My Timetable</a>
+  </footer>
+</body>
+</html>
